@@ -2,19 +2,13 @@
 var events = require('events');
 var debug = require('debug')('library-api');
 var moment = require('moment');
+var AdminDal=require('../dal/admin');
 var UserDal = require('../dal/user');
 var ProfileDal = require('../dal/profile');
-var Category = require('../dal/category');
+var LibrariyanDal = require('../dal/librariyan');
 var BooksDal = require('../dal/books');
-/**
- * Create User
- *
- * 1. Validate Data
- * 2. Create User
- * 3. Create Profile
- * 4. Create UserType
- * 5. Response
- */
+ 
+ //create user
 exports.createUser = function createUser(req, res, next) {
   debug('creating user');
   
@@ -129,8 +123,7 @@ exports.getUser = function getUser(req, res, next) {
     if (err) {
       return next(err);
     }
-    // If user found return it
-    if (user) {
+     if (user) {
       res.json(user);
     } else {
       res.status(404);
@@ -179,10 +172,3 @@ exports.getUsers = function getUsers(req, res, next) {
     res.json(users);
   });
 };
-
-    // no operation(noop) function
-    exports.noop = function noop(req, res, next) {
-      res.json({
-        message: 'To Implemented!'
-      });
-    };
